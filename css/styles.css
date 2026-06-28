@@ -1,0 +1,940 @@
+/* ============================================================
+   CHAITANYA ENTERPRISES — style.css
+   Fonts: Manrope (headings) · Inter (body)
+   Palette: Emerald #0D5C4F · Dark #111111 · White #FFFFFF
+             Light Gray #F7F7F7 · Border #E5E5E5
+============================================================ */
+
+/* -------------------------------------------------------
+   0. CSS CUSTOM PROPERTIES (TOKENS)
+------------------------------------------------------- */
+:root {
+  --ce-emerald:      #0D5C4F;
+  --ce-emerald-dk:   #094a3f;
+  --ce-emerald-lt:   #e8f4f2;
+  --ce-dark:         #111111;
+  --ce-white:        #FFFFFF;
+  --ce-gray-bg:      #F7F7F7;
+  --ce-border:       #E5E5E5;
+  --ce-text:         #2a2a2a;
+  --ce-muted:        #6b7280;
+
+  --ce-radius-card:  16px;
+  --ce-radius-btn:   10px;
+
+  --ce-shadow-sm:    0 2px 12px rgba(0,0,0,.07);
+  --ce-shadow-md:    0 6px 28px rgba(0,0,0,.10);
+  --ce-shadow-lg:    0 16px 48px rgba(0,0,0,.13);
+
+  --ce-transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-heading:    'Manrope', sans-serif;
+  --font-body:       'Inter', sans-serif;
+}
+
+/* -------------------------------------------------------
+   1. BASE RESET & GLOBAL
+------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ce-text);
+  background: var(--ce-white);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--ce-transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+/* -------------------------------------------------------
+   2. REUSABLE UTILITIES
+------------------------------------------------------- */
+.ce-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ce-emerald);
+  margin-bottom: .6rem;
+}
+
+.ce-eyebrow--dark  { color: var(--ce-emerald); }
+.ce-eyebrow--light { color: rgba(255,255,255,.72); }
+
+.ce-section-heading {
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  margin-bottom: 1.25rem;
+}
+
+.ce-body-text {
+  font-size: 1.0125rem;
+  color: var(--ce-muted);
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------
+   3. SECTION WRAPPERS
+------------------------------------------------------- */
+.ce-section {
+  padding: 96px 0;
+}
+
+.ce-section--light { background: var(--ce-gray-bg); }
+.ce-section--dark  { background: var(--ce-dark); }
+.ce-section--emerald {
+  background: var(--ce-emerald);
+  position: relative;
+  overflow: hidden;
+}
+.ce-section--emerald::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(255,255,255,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------
+   4. NAVBAR
+------------------------------------------------------- */
+.ce-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  padding: 18px 0;
+  transition: padding var(--ce-transition),
+              box-shadow var(--ce-transition),
+              border-color var(--ce-transition);
+}
+
+.ce-navbar.scrolled {
+  padding: 10px 0;
+  box-shadow: var(--ce-shadow-sm);
+  border-bottom-color: var(--ce-border);
+}
+
+/* Logo mark */
+.ce-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.ce-logo-mark {
+  width: 44px;
+  height: 44px;
+  background: var(--ce-emerald);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ce-logo-mark span {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -.02em;
+}
+
+.ce-logo-mark--sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.ce-logo-mark--sm span {
+  font-size: .85rem;
+}
+
+.ce-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.ce-brand-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--ce-dark);
+  letter-spacing: -.02em;
+}
+
+.ce-brand-sub {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .6rem;
+  letter-spacing: .18em;
+  color: var(--ce-emerald);
+  margin-top: 1px;
+}
+
+.ce-brand--light .ce-brand-name { color: #fff; }
+.ce-brand--light .ce-brand-sub  { color: rgba(255,255,255,.6); }
+
+/* Nav links */
+.navbar-nav .nav-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .9375rem;
+  color: var(--ce-text);
+  padding: 4px 10px;
+  position: relative;
+  transition: color var(--ce-transition);
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--ce-emerald);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform var(--ce-transition);
+  transform-origin: left;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--ce-emerald);
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* -------------------------------------------------------
+   5. BUTTONS
+------------------------------------------------------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .9375rem;
+  padding: 12px 26px;
+  border-radius: var(--ce-radius-btn);
+  transition: all var(--ce-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Primary – emerald fill */
+.ce-btn-primary {
+  background: var(--ce-emerald);
+  color: #fff;
+  border: 2px solid var(--ce-emerald);
+}
+.ce-btn-primary:hover,
+.ce-btn-primary:focus-visible {
+  background: var(--ce-emerald-dk);
+  border-color: var(--ce-emerald-dk);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,92,79,.3);
+}
+
+/* Outline light – for dark backgrounds */
+.ce-btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,.6);
+}
+.ce-btn-outline-light:hover,
+.ce-btn-outline-light:focus-visible {
+  background: rgba(255,255,255,.12);
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Outline dark */
+.ce-btn-outline-dark {
+  background: transparent;
+  color: var(--ce-dark);
+  border: 2px solid var(--ce-border);
+}
+.ce-btn-outline-dark:hover,
+.ce-btn-outline-dark:focus-visible {
+  border-color: var(--ce-emerald);
+  color: var(--ce-emerald);
+  transform: translateY(-2px);
+}
+
+/* Outline emerald */
+.ce-btn-outline-emerald {
+  background: transparent;
+  color: var(--ce-emerald);
+  border: 2px solid var(--ce-emerald);
+}
+.ce-btn-outline-emerald:hover,
+.ce-btn-outline-emerald:focus-visible {
+  background: var(--ce-emerald);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* WhatsApp button */
+.ce-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  border: 2px solid #25D366;
+  font-size: 1rem;
+  padding: 14px 28px;
+}
+.ce-btn-whatsapp:hover,
+.ce-btn-whatsapp:focus-visible {
+  background: #1ebe5d;
+  border-color: #1ebe5d;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,.3);
+}
+
+/* Ripple effect on click */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 50% 50%;
+  background: rgba(255,255,255,.25);
+  border-radius: 50%;
+  opacity: 0;
+  transition: inset 0.5s ease, opacity 0.5s ease;
+}
+
+.btn:active::after {
+  inset: -60% -60%;
+  opacity: 1;
+  transition: inset 0s, opacity 0s;
+}
+
+/* -------------------------------------------------------
+   6. IMAGE PLACEHOLDERS
+------------------------------------------------------- */
+.ce-placeholder {
+  background: var(--ce-gray-bg);
+  border: 2px dashed var(--ce-border);
+  border-radius: var(--ce-radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ce-muted);
+  text-align: center;
+  padding: 24px;
+  transition: border-color var(--ce-transition);
+}
+
+.ce-placeholder:hover {
+  border-color: var(--ce-emerald);
+}
+
+.ce-placeholder i {
+  font-size: 2.5rem;
+  color: #c4c4c4;
+}
+
+.ce-placeholder span {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .875rem;
+  color: var(--ce-muted);
+}
+
+.ce-placeholder small {
+  font-size: .75rem;
+  color: #bbb;
+}
+
+/* Sizes */
+.ce-placeholder--large  { height: 280px; width: 100%; }
+.ce-placeholder--square { height: 160px; width: 100%; }
+.ce-placeholder--office { height: 420px; width: 100%; border-radius: 20px; }
+.ce-placeholder--footer-logo { height: 80px; max-width: 240px; border-radius: 10px; }
+
+/* -------------------------------------------------------
+   7. HERO SECTION
+------------------------------------------------------- */
+.ce-hero {
+  background: var(--ce-dark);
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px; /* compensate for fixed navbar */
+}
+
+.ce-hero-orb {
+  position: absolute;
+  top: -180px;
+  right: -180px;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,92,79,.38) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ce-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.ce-hero .ce-eyebrow {
+  color: rgba(255,255,255,.6);
+}
+
+.ce-hero-heading {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.ce-heading-accent {
+  color: var(--ce-emerald);
+  /* subtle underline stroke via background */
+  background: linear-gradient(0deg, rgba(13,92,79,.28) 0, rgba(13,92,79,.28) 8px, transparent 8px);
+  padding-bottom: 4px;
+}
+
+.ce-hero-desc {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,.7);
+  max-width: 480px;
+  line-height: 1.8;
+}
+
+/* Hero visual grid */
+.ce-hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.ce-hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ce-hero-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ce-hero-grid .ce-placeholder {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.5);
+}
+
+.ce-hero-grid .ce-placeholder i    { color: rgba(255,255,255,.2); }
+.ce-hero-grid .ce-placeholder span { color: rgba(255,255,255,.5); }
+.ce-hero-grid .ce-placeholder small { color: rgba(255,255,255,.28); }
+
+.ce-hero-grid .ce-placeholder:hover {
+  border-color: rgba(13,92,79,.7);
+}
+
+/* -------------------------------------------------------
+   8. SERVICE CARDS
+------------------------------------------------------- */
+.ce-service-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--ce-radius-card);
+  padding: 36px 28px;
+  height: 100%;
+  transition: transform var(--ce-transition),
+              box-shadow var(--ce-transition),
+              background var(--ce-transition),
+              border-color var(--ce-transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.ce-service-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.22);
+  box-shadow: 0 20px 48px rgba(0,0,0,.22);
+}
+
+.ce-service-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: background var(--ce-transition);
+}
+
+.ce-service-card:hover .ce-service-icon {
+  background: rgba(255,255,255,.18);
+}
+
+.ce-service-icon i {
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.ce-service-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .6rem;
+}
+
+.ce-service-desc {
+  font-size: .9rem;
+  color: rgba(255,255,255,.62);
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.ce-service-link {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .85rem;
+  color: rgba(255,255,255,.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color var(--ce-transition), gap var(--ce-transition);
+  margin-top: auto;
+  text-decoration: none;
+}
+
+.ce-service-link:hover {
+  color: #fff;
+  gap: 10px;
+}
+
+/* -------------------------------------------------------
+   9. INDUSTRIES (WHO WE WORK WITH)
+------------------------------------------------------- */
+.ce-industry-card {
+  background: var(--ce-white);
+  border: 1px solid var(--ce-border);
+  border-radius: var(--ce-radius-card);
+  padding: 28px 16px;
+  text-align: center;
+  transition: transform var(--ce-transition),
+              box-shadow var(--ce-transition),
+              border-color var(--ce-transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+}
+
+.ce-industry-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ce-shadow-md);
+  border-color: var(--ce-emerald);
+}
+
+.ce-industry-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--ce-emerald-lt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--ce-transition);
+}
+
+.ce-industry-card:hover .ce-industry-icon {
+  background: var(--ce-emerald);
+}
+
+.ce-industry-icon i {
+  font-size: 1.4rem;
+  color: var(--ce-emerald);
+  transition: color var(--ce-transition);
+}
+
+.ce-industry-card:hover .ce-industry-icon i {
+  color: #fff;
+}
+
+.ce-industry-card span {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .82rem;
+  color: var(--ce-text);
+  line-height: 1.4;
+}
+
+/* -------------------------------------------------------
+   10. WHY CHOOSE US — FEATURE CARDS
+------------------------------------------------------- */
+.ce-feature-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--ce-radius-card);
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  transition: transform var(--ce-transition),
+              background var(--ce-transition),
+              border-color var(--ce-transition);
+}
+
+.ce-feature-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.18);
+}
+
+.ce-feature-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(13,92,79,.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  transition: background var(--ce-transition);
+}
+
+.ce-feature-card:hover .ce-feature-icon {
+  background: var(--ce-emerald);
+}
+
+.ce-feature-icon i {
+  font-size: 1.35rem;
+  color: #fff;
+}
+
+.ce-feature-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .5rem;
+}
+
+.ce-feature-desc {
+  font-size: .875rem;
+  color: rgba(255,255,255,.55);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* -------------------------------------------------------
+   11. CONTACT SECTION
+------------------------------------------------------- */
+/* Owner circular placeholder */
+.ce-owner-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: var(--ce-white);
+  border: 2px dashed var(--ce-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--ce-muted);
+  text-align: center;
+  box-shadow: var(--ce-shadow-md);
+  transition: border-color var(--ce-transition);
+}
+
+.ce-owner-photo:hover {
+  border-color: var(--ce-emerald);
+}
+
+.ce-owner-photo i    { font-size: 2.4rem; color: #c4c4c4; }
+.ce-owner-photo span { font-size: .78rem; font-weight: 600; color: var(--ce-muted); }
+.ce-owner-photo small { font-size: .68rem; color: #bbb; }
+
+/* Contact list */
+.ce-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: .9375rem;
+}
+
+.ce-contact-list li i {
+  color: var(--ce-emerald);
+  font-size: 1.05rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.ce-contact-list a {
+  color: var(--ce-text);
+  font-weight: 500;
+}
+
+.ce-contact-list a:hover {
+  color: var(--ce-emerald);
+}
+
+.ce-contact-list address {
+  color: var(--ce-text);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* CTA box */
+.ce-contact-cta {
+  background: var(--ce-white);
+  border: 1px solid var(--ce-border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: var(--ce-shadow-md);
+}
+
+.ce-contact-cta-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ce-emerald);
+  margin-bottom: 20px;
+}
+
+.ce-contact-divider {
+  text-align: center;
+  font-size: .8rem;
+  color: var(--ce-muted);
+  margin: 16px 0;
+  position: relative;
+}
+
+.ce-contact-divider::before,
+.ce-contact-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 44%;
+  height: 1px;
+  background: var(--ce-border);
+}
+
+.ce-contact-divider::before { left: 0; }
+.ce-contact-divider::after  { right: 0; }
+
+/* -------------------------------------------------------
+   12. FOOTER
+------------------------------------------------------- */
+.ce-footer {
+  background: #0d0d0d;
+  color: rgba(255,255,255,.65);
+  font-size: .9rem;
+}
+
+.ce-footer-heading {
+  font-family: var(--font-heading);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 1.25rem;
+}
+
+.ce-footer-desc {
+  color: rgba(255,255,255,.5);
+  font-size: .9rem;
+  line-height: 1.7;
+}
+
+.ce-footer-links li {
+  margin-bottom: .6rem;
+}
+
+.ce-footer-links a {
+  color: rgba(255,255,255,.55);
+  font-size: .9rem;
+  transition: color var(--ce-transition);
+}
+
+.ce-footer-links a:hover {
+  color: #fff;
+}
+
+.ce-social-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ce-social-icon {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.6);
+  font-size: 1.05rem;
+  transition: background var(--ce-transition),
+              border-color var(--ce-transition),
+              color var(--ce-transition),
+              transform var(--ce-transition);
+  text-decoration: none;
+}
+
+.ce-social-icon:hover {
+  background: var(--ce-emerald);
+  border-color: var(--ce-emerald);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.ce-footer-address {
+  font-size: .85rem;
+  color: rgba(255,255,255,.45);
+  line-height: 1.7;
+}
+
+/* Bottom bar */
+.ce-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 20px 0;
+  font-size: .82rem;
+  color: rgba(255,255,255,.38);
+}
+
+.ce-footer-credit {
+  color: rgba(255,255,255,.38);
+}
+
+/* -------------------------------------------------------
+   13. SCROLL ANIMATIONS
+------------------------------------------------------- */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.24s; }
+.delay-3 { transition-delay: 0.36s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* -------------------------------------------------------
+   14. RESPONSIVE OVERRIDES
+------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .ce-section { padding: 72px 0; }
+
+  /* Navbar: add padding to mobile expanded menu */
+  #navbarMenu {
+    background: rgba(255,255,255,.98);
+    border-top: 1px solid var(--ce-border);
+    margin-top: 12px;
+    padding: 12px 0 16px;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .navbar-nav .nav-link::after { display: none; }
+  .navbar-nav .nav-link { padding: 8px 16px; }
+  .navbar-nav .ms-lg-3 { padding: 8px 16px; }
+  .navbar-nav .btn { width: 100%; justify-content: center; }
+
+  .ce-hero-heading { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+}
+
+@media (max-width: 767.98px) {
+  .ce-section { padding: 60px 0; }
+
+  .ce-hero { padding-top: 72px; }
+  .ce-hero-heading { font-size: 2.4rem; }
+  .ce-hero-desc { font-size: 1rem; }
+  .ce-hero-actions .btn { width: 100%; justify-content: center; }
+
+  .ce-contact-cta { padding: 28px 20px; }
+
+  .ce-owner-photo { margin: 0 auto; }
+  .ce-contact-list { text-align: left; }
+
+  .ce-footer-bottom .container {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ce-hero-grid-row { grid-template-columns: 1fr; }
+  .ce-placeholder--square { height: 120px; }
+}
